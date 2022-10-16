@@ -92,3 +92,31 @@ data['body_text_nostop'] = data['body_text_tokenized'].apply(lambda x: remove_st
 
 data.head()
 
+"""
+Stemming:
+take every word and cut it to find basic root. (only cut)
+"""
+ps = nltk.PorterStemmer()
+
+def stemming(tokenized_text):
+    text = [ps.stem(word) for word in tokenized_text]
+    return text
+
+data['body_text_stemmed'] = data['body_text_nostop'].apply(lambda x: stemming(x))
+
+data.head()
+
+"""
+Lemmatizing:
+find basic real root for every word. (Lemma)
+"""
+wn = nltk.WordNetLemmatizer()
+
+def lemmatizing(tokenized_text):
+    text = [wn.lemmatize(word) for word in tokenized_text]
+    return text
+
+data['body_text_lemmatized'] = data['body_text_nostop'].apply(lambda x: lemmatizing(x))
+
+data.head(10)
+
